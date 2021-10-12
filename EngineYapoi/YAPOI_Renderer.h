@@ -17,7 +17,10 @@ namespace YapoiEngine
 			SCREEN_WIDTH = new_SCREEN_WIDTH;
 			SCREEN_HEIGHT = new_SCREEN_HEIGHT;
 		}
-		~YAPOI_Renderer();
+		~YAPOI_Renderer()
+		{
+			cleanup(Renderer, Window);
+		}
 
 		int SCREEN_WIDTH;
 		int SCREEN_HEIGHT;
@@ -28,7 +31,7 @@ namespace YapoiEngine
 		void logSDLError(std::ostream& os, const std::string& msg);
 
 	protected:
-		void cleanup();
+		void cleanup(SDL_Renderer* ren, SDL_Window* win);
 
 		SDL_Window* Window;
 		SDL_Renderer* Renderer;
