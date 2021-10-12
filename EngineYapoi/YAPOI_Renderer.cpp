@@ -5,7 +5,7 @@ using namespace YapoiEngine;
 
 bool YAPOI_Renderer::init()
 {
-	std::cout << "YAPOI Renderer " << RendererVersion << " starting" << std::endl;
+	std::cout << "YAPOI Renderer " << RendererVersion << " initialising" << std::endl;
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		logSDLError(std::cout, "SDL_Init");
 		return 0;
@@ -37,4 +37,11 @@ bool YAPOI_Renderer::init()
 */
 void YAPOI_Renderer::logSDLError(std::ostream& os, const std::string& msg) {
 	os << msg << " error: " << SDL_GetError() << std::endl;
+}
+
+void YAPOI_Renderer::cleanup(SDL_Renderer* ren, SDL_Window* win)
+{
+	SDL_DestroyRenderer(ren);
+	SDL_DestroyWindow(win);
+	SDL_Quit();
 }
