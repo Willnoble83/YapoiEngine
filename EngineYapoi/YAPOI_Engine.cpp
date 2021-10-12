@@ -5,7 +5,7 @@ using namespace YapoiEngine;
 
 bool YAPOI_Engine::init()
 {
-	std::cout << "YAPOI Engine " << EngineVersion << " starting" << std::endl;
+	std::cout << "YAPOI Engine " << EngineVersion << " initialising" << std::endl;
 
 	// Initialise the renderer
 	Renderer = new YAPOI_Renderer(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -15,7 +15,12 @@ bool YAPOI_Engine::init()
 		return false;
 	}
 
-	std::cout << "YAPOI Engine " << EngineVersion << " Startup Successful" << std::endl;
+	std::cout << "YAPOI Engine " << EngineVersion << " initialise Successful" << std::endl;
 	return true;
+
+}
+
+void YAPOI_Engine::start()
+{
 
 }
