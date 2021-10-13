@@ -23,6 +23,7 @@
     <ClCompile Include="Root.cpp" />
     <ClCompile Include="logging.cpp" />
     <ClCompile Include="YAPOI_Engine.cpp" />
+    <ClCompile Include="YAPOI_InputManager.cpp" />
     <ClCompile Include="YAPOI_Renderer.cpp" />
     <ClCompile Include="YAPOI_SceneNode.cpp" />
     <ClCompile Include="YAPOI_World.cpp" />
@@ -30,6 +31,7 @@
   <ItemGroup>
     <ClInclude Include="nDecal.h" />
     <ClInclude Include="YAPOI_Engine.h" />
+    <ClInclude Include="YAPOI_InputManager.h" />
     <ClInclude Include="YAPOI_Renderer.h" />
     <ClInclude Include="YAPOI_SceneNode.h" />
     <ClInclude Include="YAPOI_Vector.h" />

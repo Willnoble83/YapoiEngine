@@ -4,9 +4,10 @@
 #include "YAPOI_Vector.h"
 #include "YAPOI_Renderer.h"
 #include "YAPOI_Engine.h"
+#include "YAPOI_InputManager.h"
 
 
-#define CONSTRUCT_ENGINE_REFS() {EngineModuleRefs(_engineRef,_worldRef, _rendererRef) }
+#define NODE_CONSTRUCT_ENGINE_REFS() {EngineModuleRefs(_engineRef,_worldRef, _rendererRef, _inputmanageRef) }
 
 
 namespace YapoiEngine
@@ -24,6 +25,7 @@ namespace YapoiEngine
 		virtual void Tick();
 		virtual void Update(vector2D change);
 		virtual void Shutdown();
+		virtual void ReceiveInput(SDL_Keycode Key);
 
 		void SetWorldLocation(vector2D newLoc);
 		vector2D AddVelocity(vector2D newVel, bool bOverride);
@@ -34,6 +36,7 @@ namespace YapoiEngine
 		virtual void Add(eSceneNode* node, EngineModuleRefs modules);
 		virtual void Remove(eSceneNode* node);
 		virtual eSceneNode* Find(std::string name);
+		std::string GetName() { return _name; }
 
 		bool DoesTick();
 
@@ -44,6 +47,7 @@ namespace YapoiEngine
 		YAPOI_Engine* _engineRef;
 		eWorld* _worldRef;
 		mRenderer* _rendererRef;
+		mInputManager* _inputmanageRef;
 		int _renderPriority = 1;
 		std::string _currentimage;
 		vector2D _velocity;

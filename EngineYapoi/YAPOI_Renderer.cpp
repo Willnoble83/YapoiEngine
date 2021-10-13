@@ -71,7 +71,7 @@ void YapoiEngine::mRenderer::Render()
 					renderTexture(entry.second._texture, entry.second._x, entry.second._y);
 				}
 				else {
-					//std::cout << entry.first << " has an invalid texture assigned to it!" << std::endl;
+					std::cout << entry.first << " has an invalid texture assigned to it!" << std::endl;
 				}
 			}
 		}

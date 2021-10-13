@@ -36,6 +36,9 @@
     <ClCompile Include="YAPOI_World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="YAPOI_InputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="YAPOI_Engine.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="nDecal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="YAPOI_InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

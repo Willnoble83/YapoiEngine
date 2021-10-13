@@ -1,4 +1,5 @@
 #include "YAPOI_World.h"
+#include "YAPOI_SceneNode.h"
 #include "nDecal.h"
 
 
@@ -9,14 +10,14 @@ bool YapoiEngine::eWorld::Initialise()
 	_currentimage = "Resources/PinkSquare.bmp";
 	// Initialise any starting entities in the world.
 	nDecal* TestImage = new nDecal("TestImage1", "Resources/Poggers.bmp");
-	Add(TestImage, CONSTRUCT_ENGINE_REFS());
+	Add(TestImage, NODE_CONSTRUCT_ENGINE_REFS());
 
 	nDecal* TestImage2 = new nDecal("testImage2", "Resources/Poggers.bmp");
-	Add(TestImage2, CONSTRUCT_ENGINE_REFS());
+	Add(TestImage2, NODE_CONSTRUCT_ENGINE_REFS());
 
 
 	nDecal* TestImage2Child = new nDecal("testImage2-1", "Resources/PoggersChild.bmp");
-	TestImage2->Add(TestImage2Child, CONSTRUCT_ENGINE_REFS());
+	TestImage2->Add(TestImage2Child, NODE_CONSTRUCT_ENGINE_REFS());
 	UpdateRenderer(_currentimage);
 	// Initialise all nodes in the world
 	eSceneNode::Initialise();

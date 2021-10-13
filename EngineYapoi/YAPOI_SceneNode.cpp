@@ -57,6 +57,10 @@ void YapoiEngine::eSceneNode::Shutdown(void)
 	delete this;
 }
 
+void YapoiEngine::eSceneNode::ReceiveInput(SDL_Keycode Key)
+{
+}
+
 void YapoiEngine::eSceneNode::SetWorldLocation(vector2D newLoc)
 {
 	vector2D change = newLoc - _worldLocation;
@@ -109,6 +113,7 @@ void YapoiEngine::eSceneNode::Add(eSceneNode* node, EngineModuleRefs modules)
 	node->_rendererRef = modules.rendererRef;
 	node->_engineRef = modules.engineRef;
 	node->_worldRef = modules.worldRef;
+	node->_inputmanageRef = modules.inputmanageRef;
 }
 
 void YapoiEngine::eSceneNode::Remove(eSceneNode* node)

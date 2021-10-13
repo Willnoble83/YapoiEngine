@@ -7,7 +7,7 @@ namespace YapoiEngine
 	// Forward declaration
 	class eWorld;
 	class mRenderer;
-
+	class mInputManager;
 
 
 	class YAPOI_Engine
@@ -53,6 +53,7 @@ namespace YapoiEngine
 	private:
 		mRenderer* _renderer;
 		eWorld* _world;
+		mInputManager* _inputmanager;
 
 		void cleanup();
 
@@ -61,9 +62,10 @@ namespace YapoiEngine
 	};
 
 	struct EngineModuleRefs {
-		EngineModuleRefs(YAPOI_Engine* engine, eWorld* world, mRenderer* renderer) { engineRef = engine; worldRef = world; rendererRef = renderer; }
+		EngineModuleRefs(YAPOI_Engine* engine, eWorld* world, mRenderer* renderer, mInputManager* inputmanage) { engineRef = engine; worldRef = world; rendererRef = renderer; inputmanageRef = inputmanage; }
 		YAPOI_Engine* engineRef;
 		eWorld* worldRef;
 		mRenderer* rendererRef;
+		mInputManager* inputmanageRef;
 	};
 }
