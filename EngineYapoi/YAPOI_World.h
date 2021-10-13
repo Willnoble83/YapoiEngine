@@ -8,5 +8,7 @@ namespace YapoiEngine
 	public:
 		eWorld(std::string name) : eSceneNode(name) {};
 		virtual bool Initialise(mRenderer* Renderer) override;
+
+		virtual void Tick() override;
 	};
 }

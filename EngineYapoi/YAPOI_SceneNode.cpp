@@ -4,6 +4,7 @@
 
 bool YapoiEngine::eSceneNode::Initialise(mRenderer* Renderer)
 {
+	
 	_rendererRef = Renderer;
 	for (size_t i = 0; i < _children.size(); i++)
 	{
@@ -15,9 +16,23 @@ bool YapoiEngine::eSceneNode::Initialise(mRenderer* Renderer)
 	return true;
 }
 
+void YapoiEngine::eSceneNode::Tick()
+{
+	Update(_velocity);
+	for (size_t i = 0; i < _children.size(); i++)
+	{
+		if (_children[i]->DoesTick())
+		{
+			_children[i]->Tick();
+		}
+	}
+}
+
 void YapoiEngine::eSceneNode::Update(vector2D change)
 {
+	std::cout << _name << "received update!" << std::endl;
 	_worldLocation = _worldLocation + change;
+	UpdateRenderer(_currentimage);
 	for (size_t i = 0; i < _children.size(); i++)
 	{
 		_children[i]->Update(change);
@@ -34,8 +49,28 @@ void YapoiEngine::eSceneNode::Shutdown(void)
 	delete this;
 }
 
+void YapoiEngine::eSceneNode::SetWorldLocation(vector2D newLoc)
+{
+	vector2D change = newLoc - _worldLocation;
+	Update(change);
+}
+
+YapoiEngine::vector2D YapoiEngine::eSceneNode::AddVelocity(vector2D newVel, bool bOverride)
+{
+	if (bOverride)
+	{
+		_velocity = newVel;
+		return _velocity;
+	}
+	else {
+		_velocity += newVel;
+		return _velocity;
+	}
+}
+
 void YapoiEngine::eSceneNode::UpdateRenderer(const std::string& file)
 {
+	std::cout << _name <<" Updating Renderer with info: (tex file, x, y): " << file << "," << _worldLocation._x << "," << _worldLocation._y << std::endl;
 	SDL_Texture* Tex =  _rendererRef->loadTexture(file);
 	_rendererRef->UpdateRenderState(_name, RenderObject(Tex, (int)_worldLocation._x, (int)_worldLocation._y, _renderPriority));
 }
@@ -76,5 +111,10 @@ YapoiEngine::eSceneNode* YapoiEngine::eSceneNode::Find(std::string name)
 		}
 	}
 	return nullptr;
+}
+
+bool YapoiEngine::eSceneNode::DoesTick()
+{
+	return bDoesTick;
 }
 

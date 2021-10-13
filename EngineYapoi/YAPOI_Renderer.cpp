@@ -41,35 +41,73 @@ void mRenderer::logSDLError(std::ostream& os, const std::string& msg) {
 
 void mRenderer::cleanup(SDL_Renderer* ren, SDL_Window* win)
 {
+	std::cout << "Renderer cleaning up!";
 	SDL_DestroyRenderer(ren);
 	SDL_DestroyWindow(win);
 	SDL_Quit();
 }
 
-
-
-void YapoiEngine::mRenderer::startRender()
+std::vector<RenderObject> YapoiEngine::mRenderer::SortRenderObjects()
 {
-
-	// Render
-	for (int i = 0; i < 3; ++i) {
-		//First clear the renderer
-
-		SDL_RenderClear(_renderer);
-		//Draw the texture
-
-		for (const auto& entry : _nodeRenderInfo)
-		{
-			renderTexture(entry.second._texture,entry.second._x , entry.second._y);
-		}
-
-		//Update the screen
-
-		SDL_RenderPresent(_renderer);
-		//Take a quick break after all that hard work
-
-		SDL_Delay(1000);
+	RenderObject RenderObjects[100] = {};
+	int index = 0;
+	auto iter = 0;
+	for (auto iter = _nodeRenderInfo.begin(); iter != _nodeRenderInfo.end() || index == 99; ++iter) {
+		RenderObjects[index] = iter->second;
+		index++;
 	}
+	bool bHadToSort = true;
+	RenderObject TempObject;
+	while (bHadToSort)
+	{
+		std::cout << "going for another round";
+		index = 0;
+		bHadToSort = false;
+		while (RenderObjects[index+1]._texture != NULL)
+		{
+			std::cout << "Sorting through the list";
+			if (RenderObjects[index + 1] < RenderObjects[index])
+			{
+				bHadToSort = true;
+				TempObject = RenderObjects[index];
+				RenderObjects[index] = RenderObjects[index + 1];
+				RenderObjects[index + 1] = TempObject;
+			}
+			index++;
+		}
+		
+	}
+	return std::vector<RenderObject>();
+}
+
+
+
+void YapoiEngine::mRenderer::Render()
+{
+	//First clear the renderer
+
+	SDL_RenderClear(_renderer);
+	
+	//SortRenderObjects();
+
+	// Iterate through the render information
+	for (const auto& entry : _nodeRenderInfo)
+	{
+		std::cout << "Rendering: " << entry.first << std::endl;
+		if (entry.second._texture != nullptr)
+		{
+			// Render the specified texture at its specified co-ordinates.
+			renderTexture(entry.second._texture, entry.second._x, entry.second._y);
+		}
+		else {
+			std::cout << entry.first << " has an invalid texture assigned to it!" << std::endl;
+		}
+	}
+
+	//Update the screen
+
+	SDL_RenderPresent(_renderer);
+	//Take a quick break after all that hard work
 }
 
 void YapoiEngine::mRenderer::renderTexture(SDL_Texture* tex, int x, int y) {

@@ -30,7 +30,7 @@
     <ClCompile Include="YAPOI_SceneNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="nTestImage.cpp">
+    <ClCompile Include="nDecal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="YAPOI_World.cpp">
@@ -53,7 +53,7 @@
     <ClInclude Include="YAPOI_Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="nTestImage.h">
+    <ClInclude Include="nDecal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

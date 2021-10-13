@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <SDL.h>
+#include <vector>
 #include <map>
 
 namespace YapoiEngine
@@ -35,6 +36,14 @@ namespace YapoiEngine
 		{
 			return _renderpriority < other._renderpriority;
 		}
+		RenderObject operator=(const RenderObject& other)
+		{
+			this->_texture = other._texture;
+			this->_x = other._x;
+			this->_y = other._y;
+			this->_renderpriority = other._renderpriority;
+			return *this;
+		}
 	};
 
 	class mRenderer
@@ -53,7 +62,9 @@ namespace YapoiEngine
 		}
 		~mRenderer()
 		{
+			std::cout << "Renderer shutting down" << std::endl;
 			cleanup(_renderer, _window);
+			std::cout << "Renderer successfully shut down" << std::endl;
 		}
 
 
@@ -70,7 +81,7 @@ namespace YapoiEngine
 		*/
 		void renderTexture(SDL_Texture* tex, int x, int y);
 
-		void startRender();
+		void Render();
 
 		/**
 		* Loads a BMP image into a texture on the rendering device
@@ -89,6 +100,8 @@ namespace YapoiEngine
 
 	protected:
 		void cleanup(SDL_Renderer* ren, SDL_Window* win);
+		std::vector<RenderObject> SortRenderObjects();
+
 
 		std::string _windowName;
 		SDL_Window* _window;

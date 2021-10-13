@@ -35,6 +35,11 @@ namespace YapoiEngine
 			this->_y = other._y;
 			return *this;
 		}
-
+		vector2D operator+=(const vector2D& other)
+		{
+			this->_x = this->_x + other._x;
+			this->_y = this->_y + other._y;
+			return *this;
+		}
 	};
 }

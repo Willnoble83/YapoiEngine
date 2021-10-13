@@ -30,5 +30,12 @@ bool YapoiEngine::YAPOI_Engine::init()
 
 void YapoiEngine::YAPOI_Engine::start()
 {
-	_renderer->startRender();
+	for (int i = 0; i < 10; i++)
+	{
+		// Render state after last update
+		_renderer->Render();
+		_world->Tick();
+		SDL_Delay(2000);
+	}
+
 }

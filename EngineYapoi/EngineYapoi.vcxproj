@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="nTestImage.cpp" />
+    <ClCompile Include="nDecal.cpp" />
     <ClCompile Include="Root.cpp" />
     <ClCompile Include="logging.cpp" />
     <ClCompile Include="YAPOI_Engine.cpp" />
@@ -28,7 +28,7 @@
     <ClCompile Include="YAPOI_World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="nTestImage.h" />
+    <ClInclude Include="nDecal.h" />
     <ClInclude Include="YAPOI_Engine.h" />
     <ClInclude Include="YAPOI_Renderer.h" />
     <ClInclude Include="YAPOI_SceneNode.h" />
