@@ -10,9 +10,9 @@ bool YapoiEngine::mInputManager::Initialise()
 
 bool YapoiEngine::mInputManager::RegisterInput(SDL_Keycode KeycodeToRegister, eSceneNode* RequestingSceneNode)
 {
-    if (_KeyMap.count(KeycodeToRegister) == 0)
+    if (_KeybindMap.count(KeycodeToRegister) == 0)
     {
-        _KeyMap[KeycodeToRegister] = RequestingSceneNode;
+        _KeybindMap[KeycodeToRegister] = RequestingSceneNode;
         return true;
     }
     else {
@@ -23,14 +23,14 @@ bool YapoiEngine::mInputManager::RegisterInput(SDL_Keycode KeycodeToRegister, eS
 
 bool YapoiEngine::mInputManager::RemoveInputRegistration(SDL_Keycode KeycodeToRemove)
 {
-    _KeyMap.erase(KeycodeToRemove);
+    _KeybindMap.erase(KeycodeToRemove);
     return true;
 }
 
 bool YapoiEngine::mInputManager::RemoveInputRegistration(eSceneNode* RequestingSceneNode)
 {
     std::vector<SDL_Keycode> Keycodes = {};
-    for (const auto& entry : _KeyMap)
+    for (const auto& entry : _KeybindMap)
     {
         if (entry.second == RequestingSceneNode)
         {
@@ -42,4 +42,22 @@ bool YapoiEngine::mInputManager::RemoveInputRegistration(eSceneNode* RequestingS
         RemoveInputRegistration(Keycodes[i]);
     }
     return true;
+}
+
+void YapoiEngine::mInputManager::ProcessKeyEvent(SDL_Keycode KeyPressed, bool bKeyUp)
+{
+    if (!bKeyUp)
+    {
+        // If this is a repeated keydown press - Ignore it.
+        if (_KeyDownMap[KeyPressed])
+        {
+            return;
+        }
+    }
+    std::cout << "Key Input Detected: " << KeyPressed << " bIsUp: " << bKeyUp;
+    if (_KeybindMap.count(KeyPressed) == 1)
+    {
+        _KeybindMap[KeyPressed]->ReceiveInput(KeyPressed, bKeyUp);
+        _KeyDownMap[KeyPressed] = !bKeyUp;
+    }
 }

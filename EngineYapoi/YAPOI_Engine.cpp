@@ -26,9 +26,18 @@ bool YapoiEngine::YAPOI_Engine::init()
 	{
 		std::cout << "YAPOI Engine " << EngineVersion << "Startup Failed: World failed to initialise" << std::endl;
 		delete _world;
+		delete _renderer;
 		return false;
 	}
-
+	_inputmanager = new mInputManager();
+	if (!_inputmanager->Initialise())
+	{
+		std::cout << "YAPOI Engine " << EngineVersion << "Startup Failed: Input Manager failed to initialise" << std::endl;
+		delete _world;
+		delete _renderer;
+		delete _inputmanager;
+		return false;
+	}
 
 	std::cout << "YAPOI Engine " << EngineVersion << " initialise Successful" << std::endl;
 	return true;
@@ -46,6 +55,14 @@ void YapoiEngine::YAPOI_Engine::start()
 			if (e.type == SDL_QUIT)
 			{
 				bQuit = true;
+			}
+			if (e.type == SDL_KEYDOWN)
+			{
+				_inputmanager->ProcessKeyEvent(e.key.keysym.sym, false);
+			}
+			if (e.type == SDL_KEYUP)
+			{
+				_inputmanager->ProcessKeyEvent(e.key.keysym.sym, true);
 			}
 		}
 

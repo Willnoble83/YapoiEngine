@@ -57,7 +57,7 @@ void YapoiEngine::eSceneNode::Shutdown(void)
 	delete this;
 }
 
-void YapoiEngine::eSceneNode::ReceiveInput(SDL_Keycode Key)
+void YapoiEngine::eSceneNode::ReceiveInput(SDL_Keycode Key, bool bKeyUp)
 {
 }
 

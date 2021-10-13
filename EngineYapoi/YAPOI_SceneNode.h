@@ -25,7 +25,7 @@ namespace YapoiEngine
 		virtual void Tick();
 		virtual void Update(vector2D change);
 		virtual void Shutdown();
-		virtual void ReceiveInput(SDL_Keycode Key);
+		virtual void ReceiveInput(SDL_Keycode Key, bool bKeyUp);
 
 		void SetWorldLocation(vector2D newLoc);
 		vector2D AddVelocity(vector2D newVel, bool bOverride);
