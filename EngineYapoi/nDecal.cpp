@@ -7,8 +7,8 @@ YapoiEngine::nDecal::nDecal(std::string name, std::string imagepath) : eSceneNod
 	_currentimage = imagepath;
 }
 
-bool YapoiEngine::nDecal::Initialise(mRenderer* Renderer)
+bool YapoiEngine::nDecal::Initialise()
 {
-	eSceneNode::Initialise(Renderer);
+	eSceneNode::Initialise();
 	return true;
 } 

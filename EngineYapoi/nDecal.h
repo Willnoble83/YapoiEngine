@@ -10,7 +10,7 @@ namespace YapoiEngine
     {
     public:
         nDecal(std::string name, std::string imagepath);
-        virtual bool Initialise(mRenderer* Renderer) override;
+        virtual bool Initialise() override;
 
     protected:
         

@@ -2,18 +2,16 @@
 #include "YAPOI_Renderer.h"
 
 
-bool YapoiEngine::eSceneNode::Initialise(mRenderer* Renderer)
+bool YapoiEngine::eSceneNode::Initialise()
 {
-	
-	_rendererRef = Renderer;
 	if (getDoesRender())
 	{
-		std::cout << "Registering node to render" << std::endl;
+		//std::cout << "Registering node to render" << std::endl;
 		_renderInfoPtr = _rendererRef->RegisterRenderState(_name, RenderObject(_rendererRef->loadTexture(_currentimage), (int)_worldLocation._x, (int)_worldLocation._y, _renderPriority));
 	}
 	for (size_t i = 0; i < _children.size(); i++)
 	{
-		if (!(_children[i]->Initialise(Renderer)))
+		if (!(_children[i]->Initialise()))
 		{
 			return false;
 		}
@@ -23,7 +21,9 @@ bool YapoiEngine::eSceneNode::Initialise(mRenderer* Renderer)
 
 void YapoiEngine::eSceneNode::Tick()
 {
-	Update(_velocity);
+	//std::cout <<  "Velocity: " << _velocity.ToString() <<  " | Movement: " << (_velocity * _engineRef->GetDeltaTime()).ToString() << std::endl;
+	Update(_velocity * _engineRef->GetDeltaTime());
+	//std::cout << "Delta Time: " << _engineRef->GetDeltaTime();
 	for (size_t i = 0; i < _children.size(); i++)
 	{
 		if (_children[i]->DoesTick())
@@ -35,7 +35,7 @@ void YapoiEngine::eSceneNode::Tick()
 
 void YapoiEngine::eSceneNode::Update(vector2D change)
 {
-	std::cout << _name << "received update!" << std::endl;
+	//std::cout << _name << "received update!" << std::endl;
 	_worldLocation = _worldLocation + change;
 	if (getDoesRender())
 	{
@@ -77,6 +77,7 @@ YapoiEngine::vector2D YapoiEngine::eSceneNode::AddVelocity(vector2D newVel, bool
 			return _velocity;
 		}
 	}
+	return _velocity;
 }
 
 void YapoiEngine::eSceneNode::UpdateRenderer(const std::string& file)
@@ -85,10 +86,10 @@ void YapoiEngine::eSceneNode::UpdateRenderer(const std::string& file)
 	{
 		if (_renderInfoPtr != nullptr)
 		{
-			std::cout << _name << " Updating Renderer with info: (tex file, x, y): " << file << "," << _worldLocation._x << "," << _worldLocation._y << std::endl;
+			//std::cout << _name << " Updating Renderer with info: (tex file, x, y): " << file << "," << _worldLocation._x << "," << _worldLocation._y << std::endl;
 			_renderInfoPtr->_texture =  _rendererRef->loadTexture(file);
-			_renderInfoPtr->_x = _worldLocation._x;
-			_renderInfoPtr->_y = _worldLocation._y;
+			_renderInfoPtr->_x = (int)_worldLocation._x;
+			_renderInfoPtr->_y = (int)_worldLocation._y;
 		}
 
 	}
@@ -102,9 +103,12 @@ void YapoiEngine::eSceneNode::UpdateRenderPriority(int newPrio)
 }
 
 
-void YapoiEngine::eSceneNode::Add(eSceneNode* node)
+void YapoiEngine::eSceneNode::Add(eSceneNode* node, EngineModuleRefs modules)
 {
 	_children.push_back(node);
+	node->_rendererRef = modules.rendererRef;
+	node->_engineRef = modules.engineRef;
+	node->_worldRef = modules.worldRef;
 }
 
 void YapoiEngine::eSceneNode::Remove(eSceneNode* node)

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "YAPOI_Engine.h"
+#include "YAPOI_Renderer.h"
 
 using namespace YapoiEngine;
 
@@ -64,14 +64,14 @@ void YapoiEngine::mRenderer::Render()
 		{
 			if (entry.second._renderpriority == renderlevel)
 			{
-				std::cout << "Rendering: " << entry.first << std::endl;
+				//std::cout << "Rendering: " << entry.first << std::endl;
 				if (entry.second._texture != nullptr)
 				{
 					// Render the specified texture at its specified co-ordinates.
 					renderTexture(entry.second._texture, entry.second._x, entry.second._y);
 				}
 				else {
-					std::cout << entry.first << " has an invalid texture assigned to it!" << std::endl;
+					//std::cout << entry.first << " has an invalid texture assigned to it!" << std::endl;
 				}
 			}
 		}
@@ -126,7 +126,7 @@ RenderObject* YapoiEngine::mRenderer::RegisterRenderState(std::string nodeName, 
 	if (RenderInfo._renderpriority >= _maxrenderlevel)
 	{
 		_maxrenderlevel = RenderInfo._renderpriority+1;
-		std::cout << "Render level increased : " << _maxrenderlevel << std::endl;
+		//std::cout << "Render level increased : " << _maxrenderlevel << std::endl;
 	}
 	return &_nodeRenderInfo[nodeName];
 }

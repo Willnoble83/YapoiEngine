@@ -3,10 +3,16 @@
 #include <vector>
 #include "YAPOI_Vector.h"
 #include "YAPOI_Renderer.h"
+#include "YAPOI_Engine.h"
+
+
+#define CONSTRUCT_ENGINE_REFS() {EngineModuleRefs(_engineRef,_worldRef, _rendererRef) }
 
 
 namespace YapoiEngine
 {
+	class YAPOI_Engine;
+
 	class eSceneNode
 	{
 	public:
@@ -14,7 +20,7 @@ namespace YapoiEngine
 		~eSceneNode(void) { };
 
 		// Node Functions
-		virtual bool Initialise(mRenderer* Renderer);
+		virtual bool Initialise();
 		virtual void Tick();
 		virtual void Update(vector2D change);
 		virtual void Shutdown();
@@ -25,7 +31,7 @@ namespace YapoiEngine
 		void UpdateRenderer(const std::string& file);
 		void UpdateRenderPriority(int newPrio);
 
-		virtual void Add(eSceneNode* node);
+		virtual void Add(eSceneNode* node, EngineModuleRefs modules);
 		virtual void Remove(eSceneNode* node);
 		virtual eSceneNode* Find(std::string name);
 
@@ -35,6 +41,8 @@ namespace YapoiEngine
 		std::string _name;
 		vector2D _worldLocation;
 		std::vector<eSceneNode*> _children;
+		YAPOI_Engine* _engineRef;
+		eWorld* _worldRef;
 		mRenderer* _rendererRef;
 		int _renderPriority = 1;
 		std::string _currentimage;

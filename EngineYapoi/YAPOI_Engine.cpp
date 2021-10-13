@@ -1,6 +1,13 @@
 #include <iostream>
 #include "YAPOI_Engine.h"
+#include "YAPOI_Renderer.h"
+#include "YAPOI_World.h"
 
+
+float YapoiEngine::YAPOI_Engine::GetDeltaTime()
+{
+	return DeltaTime;
+}
 
 bool YapoiEngine::YAPOI_Engine::init()
 {
@@ -14,8 +21,8 @@ bool YapoiEngine::YAPOI_Engine::init()
 		delete _renderer;
 		return false;
 	}
-	_world = new eWorld("WorldRoot");
-	if (!_world->Initialise(_renderer))
+	_world = new eWorld("WorldRoot", EngineModuleRefs(this, _world, _renderer));
+	if (!_world->Initialise())
 	{
 		std::cout << "YAPOI Engine " << EngineVersion << "Startup Failed: World failed to initialise" << std::endl;
 		delete _world;
@@ -30,12 +37,35 @@ bool YapoiEngine::YAPOI_Engine::init()
 
 void YapoiEngine::YAPOI_Engine::start()
 {
-	for (int i = 0; i < 10; i++)
+	while (!bQuit)
 	{
-		// Render state after last update
-		_renderer->Render();
+
+		while (SDL_PollEvent(&e) != 0)
+		{
+			//User Requests Quit
+			if (e.type == SDL_QUIT)
+			{
+				bQuit = true;
+			}
+		}
+
+		std::cout << SDL_GetTicks() << " / " << LastFrameTime << std::endl;
+		DeltaTime = ((float)SDL_GetTicks() - (float)LastFrameTime) / 1000.0f;
+		std::cout << "Delta: " << DeltaTime << std::endl;
+		LastFrameTime = SDL_GetTicks();
+		
+
 		_world->Tick();
-		SDL_Delay(2000);
+
+
+		// Render state update
+		_renderer->Render();
 	}
 
+}
+
+void YapoiEngine::YAPOI_Engine::cleanup()
+{
+	delete _renderer;
+	delete _world;
 }

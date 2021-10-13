@@ -1,11 +1,14 @@
 #pragma once
 #include <iostream>
-#include "YAPOI_Renderer.h"
-#include "YAPOI_World.h"
+#include "SDL.h"
 
 namespace YapoiEngine
 {
-	
+	// Forward declaration
+	class eWorld;
+	class mRenderer;
+
+
 
 	class YAPOI_Engine
 	{
@@ -20,8 +23,7 @@ namespace YapoiEngine
 		~YAPOI_Engine()
 		{
 			std::cout << "YAPOI Engine Shutting down" << std::endl;
-			delete _renderer;
-			delete _world;
+			cleanup();
 			std::cout << "YAPOI Engine successfully shut down " << std::endl;
 		}
 
@@ -29,15 +31,39 @@ namespace YapoiEngine
 		int SCREEN_HEIGHT = 720;
 
 
+		float GetDeltaTime();
+
+
 		// Initialise engine modules and world
 		bool init();
 
 		//Start engine post initialisation
 		void start();
+	protected:
 
+		// Quit flag
+		bool bQuit = false;
+
+		// Event handler
+		SDL_Event e;
+
+		// Time between frame renders
+		float DeltaTime = 0.00f;
+		
 	private:
 		mRenderer* _renderer;
 		eWorld* _world;
 
+		void cleanup();
+
+
+		unsigned long int LastFrameTime = 0;
+	};
+
+	struct EngineModuleRefs {
+		EngineModuleRefs(YAPOI_Engine* engine, eWorld* world, mRenderer* renderer) { engineRef = engine; worldRef = world; rendererRef = renderer; }
+		YAPOI_Engine* engineRef;
+		eWorld* worldRef;
+		mRenderer* rendererRef;
 	};
 }

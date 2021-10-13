@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <sstream>
 
 namespace YapoiEngine
 {
@@ -21,6 +23,10 @@ namespace YapoiEngine
 		{
 			return vector2D(_x * other._x, _y * other._y);
 		}
+		vector2D operator*(const float other)
+		{
+			return vector2D(_x * other, _y * other);
+		}
 		vector2D operator/(const vector2D& other)
 		{
 			return vector2D(_x / other._x, _y / other._y);
@@ -40,6 +46,12 @@ namespace YapoiEngine
 			this->_x = this->_x + other._x;
 			this->_y = this->_y + other._y;
 			return *this;
+		}
+		std::string ToString()
+		{
+			std::ostringstream stream_out;
+			stream_out << "(" << _x << "," << _y << ")";
+			return stream_out.str();
 		}
 	};
 }
