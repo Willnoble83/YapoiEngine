@@ -10,15 +10,10 @@ bool YapoiEngine::mInputManager::Initialise()
 
 bool YapoiEngine::mInputManager::RegisterInput(SDL_Keycode KeycodeToRegister, eSceneNode* RequestingSceneNode)
 {
-    if (_KeybindMap.count(KeycodeToRegister) == 0)
-    {
-        _KeybindMap[KeycodeToRegister] = RequestingSceneNode;
-        return true;
-    }
-    else {
-        std::cout << RequestingSceneNode->GetName() << " Requested a key already registered - Registration has failed." << std::endl;
-        return false;
-    }
+    _KeybindMap[KeycodeToRegister] = RequestingSceneNode;
+    return true;
+
+
 }
 
 bool YapoiEngine::mInputManager::RemoveInputRegistration(SDL_Keycode KeycodeToRemove)

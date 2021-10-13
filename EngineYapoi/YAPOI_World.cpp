@@ -1,6 +1,7 @@
 #include "YAPOI_World.h"
 #include "YAPOI_SceneNode.h"
 #include "nDecal.h"
+#include "YAPOI_Character.h"
 
 
 
@@ -11,6 +12,9 @@ bool YapoiEngine::eWorld::Initialise()
 	// Initialise any starting entities in the world.
 	nDecal* TestImage = new nDecal("TestImage1", "Resources/Poggers.bmp");
 	Add(TestImage, NODE_CONSTRUCT_ENGINE_REFS());
+
+	nCharacter* PC = new nCharacter("PC");
+	Add(PC, NODE_CONSTRUCT_ENGINE_REFS());
 
 	nDecal* TestImage2 = new nDecal("testImage2", "Resources/Poggers.bmp");
 	Add(TestImage2, NODE_CONSTRUCT_ENGINE_REFS());
@@ -25,6 +29,7 @@ bool YapoiEngine::eWorld::Initialise()
 
 
 	// Set positions and add velocitys
+	PC->SetWorldLocation(vector2D(200, 200));
 	TestImage->SetWorldLocation(vector2D(0, 0));
 	TestImage->AddVelocity(vector2D(200, 0), true);
 	TestImage2->SetWorldLocation(vector2D(500, 500));

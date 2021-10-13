@@ -19,8 +19,8 @@ namespace YapoiEngine
 		void ProcessKeyEvent(SDL_Keycode KeyPressed, bool bKeyUp);
 	protected:
 
-		std::map<SDL_Keycode, eSceneNode*> _KeybindMap;
-		std::map<SDL_Keycode, bool> _KeyDownMap;
+		std::map<SDL_Keycode, eSceneNode*> _KeybindMap = {};
+		std::map<SDL_Keycode, bool> _KeyDownMap = {};
 	};
 }
 

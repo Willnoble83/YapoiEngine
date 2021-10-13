@@ -21,7 +21,7 @@ bool YapoiEngine::eSceneNode::Initialise()
 
 void YapoiEngine::eSceneNode::Tick()
 {
-	//std::cout <<  "Velocity: " << _velocity.ToString() <<  " | Movement: " << (_velocity * _engineRef->GetDeltaTime()).ToString() << std::endl;
+	std::cout <<  "Velocity: " << _velocity.ToString() <<  " | Movement: " << (_velocity * _engineRef->GetDeltaTime()).ToString() << std::endl;
 	Update(_velocity * _engineRef->GetDeltaTime());
 	//std::cout << "Delta Time: " << _engineRef->GetDeltaTime();
 	for (size_t i = 0; i < _children.size(); i++)
