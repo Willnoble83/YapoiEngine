@@ -21,14 +21,6 @@ bool YapoiEngine::YAPOI_Engine::init()
 		delete _renderer;
 		return false;
 	}
-	_world = new eWorld("WorldRoot", EngineModuleRefs(this, _world, _renderer, _inputmanager));
-	if (!_world->Initialise())
-	{
-		std::cout << "YAPOI Engine " << EngineVersion << "Startup Failed: World failed to initialise" << std::endl;
-		delete _world;
-		delete _renderer;
-		return false;
-	}
 	_inputmanager = new mInputManager();
 	if (!_inputmanager->Initialise())
 	{
@@ -38,6 +30,15 @@ bool YapoiEngine::YAPOI_Engine::init()
 		delete _inputmanager;
 		return false;
 	}
+	_world = new eWorld("WorldRoot", EngineModuleRefs(this, _world, _renderer, _inputmanager));
+	if (!_world->Initialise())
+	{
+		std::cout << "YAPOI Engine " << EngineVersion << "Startup Failed: World failed to initialise" << std::endl;
+		delete _world;
+		delete _renderer;
+		return false;
+	}
+
 
 	std::cout << "YAPOI Engine " << EngineVersion << " initialise Successful" << std::endl;
 	return true;
