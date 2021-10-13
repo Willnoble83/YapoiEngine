@@ -23,7 +23,7 @@ namespace YapoiEngine
 		vector2D AddVelocity(vector2D newVel, bool bOverride);
 
 		void UpdateRenderer(const std::string& file);
-
+		void UpdateRenderPriority(int newPrio);
 
 		virtual void Add(eSceneNode* node);
 		virtual void Remove(eSceneNode* node);
@@ -39,6 +39,11 @@ namespace YapoiEngine
 		int _renderPriority = 1;
 		std::string _currentimage;
 		vector2D _velocity;
+
+		RenderObject* _renderInfoPtr;
+
+		virtual bool getDoesRender() { return false; }
+
 		/*
 		* Whether tick functions are called on this class - WARNING WILL PREVENT CHILDREN TICKING
 		*/

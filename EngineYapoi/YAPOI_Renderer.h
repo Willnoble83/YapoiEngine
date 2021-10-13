@@ -90,8 +90,9 @@ namespace YapoiEngine
 		*/
 		SDL_Texture* loadTexture(const std::string& file);
  
-		void UpdateRenderState(std::string nodeName, RenderObject RenderInfo);
+		RenderObject* RegisterRenderState(std::string nodeName, RenderObject RenderInfo);
 		void RemoveRenderState(std::string nodeName);
+		void newRenderPriority(int newPrio);
 
 		// Initialise renderer
 		bool init();

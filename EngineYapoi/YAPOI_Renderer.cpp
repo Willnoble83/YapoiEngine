@@ -120,7 +120,7 @@ SDL_Texture* mRenderer::loadTexture(const std::string& file) {
 	return texture;
 }
 
-void YapoiEngine::mRenderer::UpdateRenderState(std::string nodeName, RenderObject RenderInfo)
+RenderObject* YapoiEngine::mRenderer::RegisterRenderState(std::string nodeName, RenderObject RenderInfo)
 {
 	_nodeRenderInfo[nodeName] = RenderInfo;
 	if (RenderInfo._renderpriority >= _maxrenderlevel)
@@ -128,9 +128,18 @@ void YapoiEngine::mRenderer::UpdateRenderState(std::string nodeName, RenderObjec
 		_maxrenderlevel = RenderInfo._renderpriority+1;
 		std::cout << "Render level increased : " << _maxrenderlevel << std::endl;
 	}
+	return &_nodeRenderInfo[nodeName];
 }
 
 void YapoiEngine::mRenderer::RemoveRenderState(std::string nodeName)
 {
 	_nodeRenderInfo.erase(nodeName);
+}
+
+void YapoiEngine::mRenderer::newRenderPriority(int newPrio)
+{
+	if (newPrio >= _maxrenderlevel)
+	{
+		_maxrenderlevel = newPrio + 1;
+	}
 }
