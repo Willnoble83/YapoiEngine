@@ -54,10 +54,11 @@ void YapoiEngine::mInputManager::ProcessKeyEvent(SDL_Keycode KeyPressed, bool bK
             return;
         }
     }
-    std::cout << "Key Input Detected: " << KeyPressed << " bIsUp: " << bKeyUp;
+    _KeyDownMap[KeyPressed] = !bKeyUp;
+    std::cout << "Key Input Detected: " << KeyPressed << " bIsUp: " << bKeyUp << std::endl;
     if (_KeybindMap.count(KeyPressed) == 1)
     {
         _KeybindMap[KeyPressed]->ReceiveInput(KeyPressed, bKeyUp);
-        _KeyDownMap[KeyPressed] = !bKeyUp;
+
     }
 }

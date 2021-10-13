@@ -66,9 +66,9 @@ void YapoiEngine::YAPOI_Engine::start()
 			}
 		}
 
-		std::cout << SDL_GetTicks() << " / " << LastFrameTime << std::endl;
+		//std::cout << SDL_GetTicks() << " / " << LastFrameTime << std::endl;
 		DeltaTime = ((float)SDL_GetTicks() - (float)LastFrameTime) / 1000.0f;
-		std::cout << "Delta: " << DeltaTime << std::endl;
+		//std::cout << "Delta: " << DeltaTime << std::endl;
 		LastFrameTime = SDL_GetTicks();
 		
 

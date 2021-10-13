@@ -29,6 +29,7 @@ namespace YapoiEngine
 
 		void SetWorldLocation(vector2D newLoc);
 		vector2D AddVelocity(vector2D newVel, bool bOverride);
+		std::string GetName() { return _name; }
 
 		void UpdateRenderer(const std::string& file);
 		void UpdateRenderPriority(int newPrio);
@@ -36,7 +37,6 @@ namespace YapoiEngine
 		virtual void Add(eSceneNode* node, EngineModuleRefs modules);
 		virtual void Remove(eSceneNode* node);
 		virtual eSceneNode* Find(std::string name);
-		std::string GetName() { return _name; }
 
 		bool DoesTick();
 
