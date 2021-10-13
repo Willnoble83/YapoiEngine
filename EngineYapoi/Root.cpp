@@ -71,7 +71,11 @@ void cleanup(SDL_Texture* tex, SDL_Renderer* ren, SDL_Window* win)
 int main(int, char**) {
 	
 	YapoiEngine::YAPOI_Engine* Engine = new YapoiEngine::YAPOI_Engine();
-	Engine->init();
+	if (Engine->init())
+	{
+		Engine->start();
+	}
+	delete Engine;
 	return 0;
 }
 
@@ -102,21 +106,6 @@ int main(int, char**) {
 	SDL_Texture* tex = loadTexture("Resources/Poggers.bmp", renderer);
 
 
-	// Render
-	for (int i = 0; i < 3; ++i) {
-		//First clear the renderer
-
-		SDL_RenderClear(renderer);
-		//Draw the texture
-
-		renderTexture(tex, renderer, 0, 0);
-		//Update the screen
-
-		SDL_RenderPresent(renderer);
-		//Take a quick break after all that hard work
-
-		SDL_Delay(1000);
-	}
 	cleanup(tex, renderer, window);
 	return 0;
 

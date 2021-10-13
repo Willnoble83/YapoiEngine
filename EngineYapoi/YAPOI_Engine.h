@@ -1,5 +1,6 @@
 #pragma once
 #include "YAPOI_Renderer.h"
+#include "YAPOI_World.h"
 
 namespace YapoiEngine
 {
@@ -12,11 +13,13 @@ namespace YapoiEngine
 		const std::string EngineVersion = "v0.1.0";
 
 		YAPOI_Engine() {
-			Renderer = NULL;
+			_renderer = NULL;
+			_world = NULL;
 		 }
 		~YAPOI_Engine()
 		{
-			delete Renderer;
+			delete _renderer;
+			delete _world;
 		}
 
 		int SCREEN_WIDTH = 1280;
@@ -29,7 +32,8 @@ namespace YapoiEngine
 		void start();
 
 	private:
-		YAPOI_Renderer* Renderer;
+		mRenderer* _renderer;
+		eWorld* _world;
 
 	};
 }

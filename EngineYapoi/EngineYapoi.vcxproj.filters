@@ -27,12 +27,33 @@
     <ClCompile Include="YAPOI_Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="YAPOI_SceneNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nTestImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="YAPOI_World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="YAPOI_Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="YAPOI_Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="YAPOI_World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="YAPOI_SceneNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="YAPOI_Vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nTestImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
