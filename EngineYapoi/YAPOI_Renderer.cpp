@@ -47,39 +47,6 @@ void mRenderer::cleanup(SDL_Renderer* ren, SDL_Window* win)
 	SDL_Quit();
 }
 
-std::vector<RenderObject> YapoiEngine::mRenderer::SortRenderObjects()
-{
-	RenderObject RenderObjects[100] = {};
-	int index = 0;
-	auto iter = 0;
-	for (auto iter = _nodeRenderInfo.begin(); iter != _nodeRenderInfo.end() || index == 99; ++iter) {
-		RenderObjects[index] = iter->second;
-		index++;
-	}
-	bool bHadToSort = true;
-	RenderObject TempObject;
-	while (bHadToSort)
-	{
-		std::cout << "going for another round";
-		index = 0;
-		bHadToSort = false;
-		while (RenderObjects[index+1]._texture != NULL)
-		{
-			std::cout << "Sorting through the list";
-			if (RenderObjects[index + 1] < RenderObjects[index])
-			{
-				bHadToSort = true;
-				TempObject = RenderObjects[index];
-				RenderObjects[index] = RenderObjects[index + 1];
-				RenderObjects[index + 1] = TempObject;
-			}
-			index++;
-		}
-		
-	}
-	return std::vector<RenderObject>();
-}
-
 
 
 void YapoiEngine::mRenderer::Render()
@@ -91,16 +58,22 @@ void YapoiEngine::mRenderer::Render()
 	//SortRenderObjects();
 
 	// Iterate through the render information
-	for (const auto& entry : _nodeRenderInfo)
+	for (int renderlevel = -1; renderlevel < _maxrenderlevel; renderlevel++)
 	{
-		std::cout << "Rendering: " << entry.first << std::endl;
-		if (entry.second._texture != nullptr)
+		for (const auto& entry : _nodeRenderInfo)
 		{
-			// Render the specified texture at its specified co-ordinates.
-			renderTexture(entry.second._texture, entry.second._x, entry.second._y);
-		}
-		else {
-			std::cout << entry.first << " has an invalid texture assigned to it!" << std::endl;
+			if (entry.second._renderpriority == renderlevel)
+			{
+				std::cout << "Rendering: " << entry.first << std::endl;
+				if (entry.second._texture != nullptr)
+				{
+					// Render the specified texture at its specified co-ordinates.
+					renderTexture(entry.second._texture, entry.second._x, entry.second._y);
+				}
+				else {
+					std::cout << entry.first << " has an invalid texture assigned to it!" << std::endl;
+				}
+			}
 		}
 	}
 
@@ -150,6 +123,11 @@ SDL_Texture* mRenderer::loadTexture(const std::string& file) {
 void YapoiEngine::mRenderer::UpdateRenderState(std::string nodeName, RenderObject RenderInfo)
 {
 	_nodeRenderInfo[nodeName] = RenderInfo;
+	if (RenderInfo._renderpriority >= _maxrenderlevel)
+	{
+		_maxrenderlevel = RenderInfo._renderpriority+1;
+		std::cout << "Render level increased : " << _maxrenderlevel << std::endl;
+	}
 }
 
 void YapoiEngine::mRenderer::RemoveRenderState(std::string nodeName)

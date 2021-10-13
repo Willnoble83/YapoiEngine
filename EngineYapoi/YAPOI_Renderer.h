@@ -100,9 +100,8 @@ namespace YapoiEngine
 
 	protected:
 		void cleanup(SDL_Renderer* ren, SDL_Window* win);
-		std::vector<RenderObject> SortRenderObjects();
 
-
+		int _maxrenderlevel = -1;
 		std::string _windowName;
 		SDL_Window* _window;
 		SDL_Renderer* _renderer;
