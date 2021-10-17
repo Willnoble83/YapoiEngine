@@ -21,7 +21,6 @@ void YapoiEngine::nCharacter::Tick()
 
 void YapoiEngine::nCharacter::ReceiveInput(SDL_Keycode Key, bool bKeyUp)
 {
-	std::cout << "Received input: " << Key << std::endl;
 	if (bKeyUp)
 	{
 		switch (Key)
