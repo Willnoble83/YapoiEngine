@@ -153,3 +153,8 @@ bool YapoiEngine::eSceneNode::DoesTick()
 	return bDoesTick;
 }
 
+void YapoiEngine::eSceneNode::UpdateWorldRef(eWorld* newWorld)
+{
+	_worldRef = newWorld;
+}
+

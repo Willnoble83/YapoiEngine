@@ -1,5 +1,9 @@
 #pragma once
 #include "YAPOI_SceneNode.h"
+#include <rapidxml.hpp>
+#include <rapidxml_utils.hpp>
+#include <rapidxml_iterators.hpp>
+#include <rapidxml_print.hpp>
 
 namespace YapoiEngine
 {
@@ -11,6 +15,8 @@ namespace YapoiEngine
 
 		virtual void Tick() override;
 
+		void LoadFromFile(const char* File);
 		
+		void ParseChildren(rapidxml::xml_node<>* node, eSceneNode* parentNode);
 	};
 }

@@ -8,7 +8,7 @@ namespace YapoiEngine
 	class eWorld;
 	class mRenderer;
 	class mInputManager;
-
+	class mSceneNodeFactory;
 
 	class YAPOI_Engine
 	{
@@ -39,6 +39,10 @@ namespace YapoiEngine
 
 		//Start engine post initialisation
 		void start();
+
+		mSceneNodeFactory* nodeFactory;
+
+		void TravelNewWorld(std::string WorldFile);
 	protected:
 
 		// Quit flag
@@ -67,5 +71,6 @@ namespace YapoiEngine
 		eWorld* worldRef;
 		mRenderer* rendererRef;
 		mInputManager* inputmanageRef;
+
 	};
 }

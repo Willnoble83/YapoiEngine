@@ -2,6 +2,7 @@
 #include "YAPOI_Engine.h"
 #include "YAPOI_Renderer.h"
 #include "YAPOI_World.h"
+#include "mSceneNodeFactory.h"
 
 
 float YapoiEngine::YAPOI_Engine::GetDeltaTime()
@@ -31,6 +32,7 @@ bool YapoiEngine::YAPOI_Engine::init()
 		return false;
 	}
 	_world = new eWorld("WorldRoot", EngineModuleRefs(this, _world, _renderer, _inputmanager));
+	_world->LoadFromFile("Worlds/testworld.xml");
 	if (!_world->Initialise())
 	{
 		std::cout << "YAPOI Engine " << EngineVersion << "Startup Failed: World failed to initialise" << std::endl;
@@ -39,6 +41,7 @@ bool YapoiEngine::YAPOI_Engine::init()
 		return false;
 	}
 
+	nodeFactory = new YapoiEngine::mSceneNodeFactory();
 
 	std::cout << "YAPOI Engine " << EngineVersion << " initialise Successful" << std::endl;
 	return true;
@@ -80,6 +83,17 @@ void YapoiEngine::YAPOI_Engine::start()
 		_renderer->Render();
 	}
 
+}
+
+void YapoiEngine::YAPOI_Engine::TravelNewWorld(std::string WorldFile)
+{
+	eWorld* newWorld = NULL;
+	newWorld = new eWorld("WorldRoot", EngineModuleRefs(this, newWorld, _renderer, _inputmanager));
+	newWorld->UpdateWorldRef(newWorld);
+	_world->Shutdown();
+	_world = newWorld;
+	_world->LoadFromFile(WorldFile.c_str());
+	_world->Initialise();
 }
 
 void YapoiEngine::YAPOI_Engine::cleanup()

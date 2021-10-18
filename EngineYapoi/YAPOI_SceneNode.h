@@ -40,6 +40,8 @@ namespace YapoiEngine
 
 		bool DoesTick();
 
+		void UpdateWorldRef(eWorld* newWorld);
+
 	protected:
 		std::string _name;
 		vector2D _worldLocation;
