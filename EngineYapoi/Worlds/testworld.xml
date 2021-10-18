@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rootnode version="1.0">
+	<worldnodes>
+		<scenenode class="character" name="PlayerCharacter" locationX="300" locationY="300"/>
+		<scenenode class="decal" name="decal1" locationX="500" locationY="500">
+			<arg>Resources/Poggers.bmp</arg>
+		</scenenode>
+	</worldnodes>
+</rootnode>
