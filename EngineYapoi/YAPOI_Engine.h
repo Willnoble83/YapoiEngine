@@ -19,6 +19,9 @@ namespace YapoiEngine
 		YAPOI_Engine() {
 			_renderer = NULL;
 			_world = NULL;
+			e = SDL_Event();
+			_inputmanager = NULL;
+			nodeFactory = NULL;
 		 }
 		~YAPOI_Engine()
 		{

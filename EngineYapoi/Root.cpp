@@ -1,4 +1,5 @@
 #include <iostream>
+#define SDL_MAIN_HANDLED
 #include <SDL.h>
 #include "YAPOI_Engine.h"
 
@@ -68,8 +69,9 @@ void cleanup(SDL_Texture* tex, SDL_Renderer* ren, SDL_Window* win)
 	SDL_Quit();
 }
 */
-int main(int, char**) {
-	
+int main(int, char**) 
+{
+	SDL_SetMainReady();
 	YapoiEngine::YAPOI_Engine* Engine = new YapoiEngine::YAPOI_Engine();
 	if (Engine->init())
 	{

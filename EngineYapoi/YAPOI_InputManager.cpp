@@ -10,8 +10,15 @@ bool YapoiEngine::mInputManager::Initialise()
 
 bool YapoiEngine::mInputManager::RegisterInput(SDL_Keycode KeycodeToRegister, eSceneNode* RequestingSceneNode)
 {
-    _KeybindMap[KeycodeToRegister] = RequestingSceneNode;
-    return true;
+    if (_KeybindMap[KeycodeToRegister] != NULL)
+    {
+        _KeybindMap[KeycodeToRegister] = RequestingSceneNode;
+        return true;
+    }
+    else {
+        std::cout << ("Cannot register keybind: ", KeycodeToRegister, ", it has already been registered") << std::endl;
+    }
+
 
 
 }
@@ -49,11 +56,23 @@ void YapoiEngine::mInputManager::ProcessKeyEvent(SDL_Keycode KeyPressed, bool bK
             return;
         }
     }
+    else {
+        // If this is an up event without any corresponding down.
+        if (_KeyDownMap[KeyPressed])
+        {
+            return;
+        }
+    }
     _KeyDownMap[KeyPressed] = !bKeyUp;
-    std::cout << "Key Input Detected: " << KeyPressed << " bIsUp: " << bKeyUp << std::endl;
+    //std::cout << "Key Input Detected: " << KeyPressed << " bIsUp: " << bKeyUp << std::endl;
     if (_KeybindMap.count(KeyPressed) == 1)
     {
         _KeybindMap[KeyPressed]->ReceiveInput(KeyPressed, bKeyUp);
 
     }
+}
+
+void YapoiEngine::mInputManager::PurgeInputRegistration()
+{
+    _KeyDownMap.clear();
 }

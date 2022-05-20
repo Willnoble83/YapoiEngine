@@ -17,6 +17,8 @@ namespace YapoiEngine
 		bool RemoveInputRegistration(eSceneNode* RequestingSceneNode);
 
 		void ProcessKeyEvent(SDL_Keycode KeyPressed, bool bKeyUp);
+
+		void PurgeInputRegistration();
 	protected:
 
 		std::map<SDL_Keycode, eSceneNode*> _KeybindMap = {};

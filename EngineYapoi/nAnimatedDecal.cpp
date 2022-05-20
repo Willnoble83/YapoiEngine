@@ -15,13 +15,13 @@ void YapoiEngine::nAnimatedDecal::nextFrame()
 	if ((size_t)_currentFrame + 1 == _animationframes.size())
 	{
 		_currentFrame = 0;
-		_currentimage = _animationframes[_currentFrame];
+		_currentimage = _animationframes[(int)_currentFrame];
 		UpdateRenderer(_currentimage);
 		return;
 	}
 	else {
 		_currentFrame++;
-		_currentimage = _animationframes[_currentFrame];
+		_currentimage = _animationframes[(int)_currentFrame];
 		UpdateRenderer(_currentimage);
 		return;
 	}

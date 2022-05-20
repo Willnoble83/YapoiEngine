@@ -70,7 +70,7 @@ void YapoiEngine::eWorld::ParseChildren(rapidxml::xml_node<>* node, eSceneNode* 
 		// Create node, and add it, move to specified loc
 		eSceneNode* newNode = _engineRef->nodeFactory->CreateSceneNode(classname, args);
 		parentNode->Add(newNode, NODE_CONSTRUCT_ENGINE_REFS());
-		newNode->SetWorldLocation(vector2D(LocX,LocY));
+		newNode->SetWorldLocation(vector2D((float)LocX,(float)LocY));
 
 		// Find any children
 		ParseChildren(cur_node, newNode);

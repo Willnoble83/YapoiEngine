@@ -92,6 +92,7 @@ void YapoiEngine::YAPOI_Engine::TravelNewWorld(std::string WorldFile)
 	newWorld->UpdateWorldRef(newWorld);
 	_world->Shutdown();
 	_world = newWorld;
+	_inputmanager->PurgeInputRegistration();
 	_world->LoadFromFile(WorldFile.c_str());
 	_world->Initialise();
 }

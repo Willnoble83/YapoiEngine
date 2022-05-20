@@ -18,4 +18,5 @@ YapoiEngine::eSceneNode* YapoiEngine::mSceneNodeFactory::CreateSceneNode(std::st
 		return new nCharacter(Arguments[0]);
 	}
 	std::cout << "No Valid Scene Node Type found" << std::endl;
+	return NULL;
 }
